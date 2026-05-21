@@ -647,6 +647,17 @@
     }, { threshold: 0.12 });
 
     reveals.forEach(el => observer.observe(el));
+
+    // Auto-height for Wix iframe
+    function sendHeight() {
+      window.parent.postMessage(
+        { type: 'setHeight', height: document.body.scrollHeight }, '*'
+      );
+    }
+    window.addEventListener('load', sendHeight);
+    window.addEventListener('resize', sendHeight);
+    setTimeout(sendHeight, 500);
+    setTimeout(sendHeight, 1500);
   </script>
 
 </body>
